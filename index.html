@@ -1,78 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prototype</title>
+  <title>Faculty dashboard - Kaltura</title>
   <link rel="stylesheet" href="ds/styles.css">
+  <!-- Prototype-only: Hebrew font. DS font (Lato) has no Hebrew glyphs. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
   <div class="app">
 
     <header class="app-header">
-      <span class="app-product" id="product-name"></span>
+      <img class="app-logo" src="assets/kaltura-logo.svg" alt="Kaltura">
+      <nav class="app-nav" aria-label="ניווט ראשי">
+        <a href="index.html" class="app-nav-link" aria-current="page">בית</a>
+        <a href="#" class="app-nav-link">כל יחידות הלימוד</a>
+        <a href="#" class="app-nav-link">תיעוד פגישת מנטורינג</a>
+      </nav>
       <div class="app-header-spacer"></div>
-      <button class="ds-btn ds-btn-md ds-btn-secondary ds-btn-borderless ds-btn-icon" data-ds-theme-toggle aria-label="Toggle theme">
-        <ds-icon name="contrast"></ds-icon>
+      <button class="app-user-menu" type="button" aria-haspopup="true">
+        <ds-icon name="user" size="24"></ds-icon>
+        <span id="teacher-name"></span>
+        <ds-icon name="chevron-down" size="16"></ds-icon>
       </button>
     </header>
 
-    <aside class="app-sidebar">
-      <!-- Items are rendered from data.js by app.js -->
-      <nav class="app-nav" id="app-nav" aria-label="Main"></nav>
-    </aside>
-
     <main class="app-main">
-      <div class="app-content">
-        <h1 class="app-page-title">Home</h1>
+      <section class="app-intro">
+        <h1 class="app-greeting" id="greeting"></h1>
 
-        <section class="app-card">
-          <h2 class="app-card-title">Project details</h2>
-          <p class="app-card-text">Name your project and choose who can see it.</p>
-
-          <div class="ds-form-field">
-            <label class="ds-form-label" for="project-name">Project name</label>
-            <input class="ds-input ds-input-md" id="project-name">
-          </div>
-
-          <div class="ds-form-field">
-            <label class="ds-form-label" for="visibility">Visibility</label>
-            <div class="ds-select-wrapper" id="visibility-select">
-              <button class="ds-select" id="visibility" aria-haspopup="listbox">
-                <span></span>
-                <ds-icon class="ds-select-chevron" name="chevron-down" size="16"></ds-icon>
-              </button>
-              <!-- Options are rendered from data.js by app.js -->
-              <div class="ds-select-menu" role="listbox"></div>
+        <div class="app-group-picker">
+          <label class="app-group-label" id="group-label" for="group-trigger">בחרו קבוצות מתוך הרשימה:</label>
+          <div class="ds-select-wrapper app-group-select" id="group-select">
+            <button class="ds-select" id="group-trigger" aria-haspopup="listbox" aria-labelledby="group-label">
+              <span id="group-trigger-text">בחרו קבוצות</span>
+              <ds-icon class="ds-select-chevron" name="chevron-down" size="16"></ds-icon>
+            </button>
+            <div class="ds-select-menu app-group-menu" role="listbox" aria-multiselectable="true" aria-labelledby="group-label">
+              <label class="ds-select-item app-select-all">
+                <label class="ds-checkbox" style="pointer-events:none">
+                  <input type="checkbox" class="ds-checkbox-input" id="select-all">
+                  <span class="ds-checkbox-indicator"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </label>
+                <span class="app-select-all-label">בחרו הכל</span>
+              </label>
+              <!-- Group items are rendered from data.js by app.js -->
+              <div id="group-items"></div>
             </div>
           </div>
+        </div>
 
-          <div class="app-actions">
-            <button class="ds-btn ds-btn-md ds-btn-primary" data-ds-open="save-modal">Save changes</button>
+        <span class="app-student-pill">
+          <ds-icon name="group" size="24"></ds-icon>
+          <span id="student-count"></span>
+        </span>
+      </section>
+
+      <div class="app-stats">
+        <section class="app-stats-panel app-stats-panel-side" aria-labelledby="now-title">
+          <h2 class="app-stats-title" id="now-title">תמונת מצב</h2>
+          <div class="app-stat">
+            <div class="app-stat-head">
+              <span class="app-stat-value" id="stat-active"></span>
+              <span class="app-stat-icon app-stat-icon-success"><ds-icon name="bolt" size="24"></ds-icon></span>
+            </div>
+            <span class="app-stat-title">פעילים במערכת כעת</span>
+          </div>
+          <div class="app-stat">
+            <div class="app-stat-head">
+              <span class="app-stat-value" id="stat-attention"></span>
+              <span class="app-stat-icon app-stat-icon-danger"><ds-icon name="warning-triangle" size="24"></ds-icon></span>
+            </div>
+            <span class="app-stat-title">דורשים תשומת לב</span>
+          </div>
+        </section>
+
+        <section class="app-stats-panel app-stats-panel-main" aria-labelledby="week-title">
+          <h2 class="app-stats-title" id="week-title">למידה השבוע</h2>
+          <div class="app-stats-row">
+            <div class="app-stat">
+              <div class="app-stat-head">
+                <span class="app-stat-value" id="stat-time"></span>
+                <span class="app-stat-icon"><ds-icon name="time" size="24"></ds-icon></span>
+              </div>
+              <span class="app-stat-title">זמן פעילות ממוצע</span>
+            </div>
+            <div class="app-stat">
+              <div class="app-stat-head">
+                <span class="app-stat-value" id="stat-tutor"></span>
+                <span class="app-stat-icon"><ds-icon name="chat" size="24"></ds-icon></span>
+              </div>
+              <span class="app-stat-title">שימוש במורה הווירטואלי</span>
+            </div>
+          </div>
+          <div class="app-stats-row">
+            <div class="app-stat">
+              <div class="app-stat-head">
+                <span class="app-stat-value" id="stat-units"></span>
+                <span class="app-stat-icon"><ds-icon name="analytics" size="24"></ds-icon></span>
+              </div>
+              <span class="app-stat-title">ממוצע יחידות שהושלמו</span>
+              <span class="app-stat-note">
+                <ds-icon class="app-stat-note-warning" name="warning-circle" size="16"></ds-icon>
+                <span id="stat-units-note"></span>
+              </span>
+            </div>
+            <div class="app-stat">
+              <div class="app-stat-head">
+                <span class="app-stat-value" id="stat-steps"></span>
+                <span class="app-stat-icon"><ds-icon name="resolved" size="24"></ds-icon></span>
+              </div>
+              <span class="app-stat-title">ממוצע שלבים שהושלמו</span>
+              <span class="app-stat-note" id="stat-steps-note"></span>
+            </div>
+            <div class="app-stat">
+              <div class="app-stat-head">
+                <span class="app-stat-value" id="stat-success"></span>
+                <span class="app-stat-icon"><ds-icon name="star-full" size="24"></ds-icon></span>
+              </div>
+              <span class="app-stat-title">שלבים שהושלמו בהצלחה</span>
+              <span class="app-stat-note">
+                <span class="app-stat-trend"><ds-icon name="arrow-up" size="16"></ds-icon><span id="stat-success-trend"></span></span>
+                <span>לעומת שבוע שעבר</span>
+              </span>
+            </div>
           </div>
         </section>
       </div>
+
+      <section class="app-empty">
+        <img class="app-empty-art" src="assets/empty-state.svg" alt="">
+        <p class="app-empty-title">בחרו קבוצה כדי להתחיל</p>
+        <p class="app-empty-text">כאן יופיעו הנתונים של התלמידים בקבוצות שבחרתם</p>
+      </section>
     </main>
 
-  </div>
+    <footer class="app-footer">
+      <div class="app-footer-brand">
+        <img class="app-logo" src="assets/kaltura-logo.svg" alt="Kaltura">
+        <span class="app-footer-legal">© 2026 Kaltura Inc. כל הזכויות שמורות.</span>
+      </div>
+      <div class="app-footer-social">
+        <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="X"><ds-icon name="twitter-new" size="24"></ds-icon></a>
+        <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="LinkedIn"><ds-icon name="linkedin" size="24"></ds-icon></a>
+        <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Instagram"><ds-icon name="instagram" size="24"></ds-icon></a>
+        <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Facebook"><ds-icon name="facebook" size="24"></ds-icon></a>
+        <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Slack"><ds-icon name="slack" size="24"></ds-icon></a>
+        <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="YouTube"><ds-icon name="youtube" size="24"></ds-icon></a>
+      </div>
+    </footer>
 
-  <!-- Modal: ds.js opens it from data-ds-open and closes it from data-ds-close -->
-  <div class="ds-modal ds-modal-md" id="save-modal" hidden>
-    <div class="ds-modal-backdrop" data-ds-close></div>
-    <div class="ds-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="save-modal-title">
-      <div class="ds-modal-header">
-        <h2 class="ds-modal-title" id="save-modal-title">Save changes</h2>
-        <button class="ds-modal-close" data-ds-close aria-label="Close"><ds-icon name="clear"></ds-icon></button>
-      </div>
-      <div class="ds-modal-body">
-        <p class="app-modal-text" id="save-summary"></p>
-      </div>
-      <div class="ds-modal-footer">
-        <button class="ds-btn ds-btn-md ds-btn-secondary" data-ds-close>Cancel</button>
-        <button class="ds-btn ds-btn-md ds-btn-primary" data-ds-close data-action="confirm-save">Save</button>
-      </div>
-    </div>
   </div>
 
   <script src="ds/ds-icons.js"></script>

@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "prototype-template",
+      "runtimeExecutable": "/usr/bin/ruby",
+      "runtimeArgs": ["-run", "-ehttpd", ".", "-p8090"],
+      "port": 8090
+    },
+    {
+      "name": "landing-check-tmp",
+      "runtimeExecutable": "/usr/bin/ruby",
+      "runtimeArgs": ["-run", "-ehttpd", "/tmp/landing-check", "-p8092"],
+      "port": 8092
+    }
+  ]
+}
