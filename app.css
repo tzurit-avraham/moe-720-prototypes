@@ -1316,3 +1316,646 @@ html:has(.landing) {
     max-width: calc(var(--ds-space-16) * 6);
   }
 }
+
+/* ===== Prototype-only: floating dark / light version switch =====
+   A review tool, not part of the real page. Sits bottom-left (the end side in RTL),
+   above the sticky header. Uses DS surface tokens, so it follows each page's theme. */
+.proto-switch {
+  position: fixed;
+  bottom: var(--ds-space-6);
+  inset-inline-end: var(--ds-space-6);
+  z-index: calc(var(--ds-z-dropdown) + 1);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding-block: var(--ds-space-2);
+  padding-inline-start: var(--ds-space-4);
+  padding-inline-end: var(--ds-space-2);
+  background: var(--ds-elevated);
+  color: var(--ds-tone-2);
+  border-radius: var(--ds-roundness-3);
+  box-shadow: var(--ds-shadow-menu);
+  font-size: var(--ds-font-size-3);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+@media (max-width: 640px) {
+  .proto-switch {
+    bottom: var(--ds-space-4);
+    inset-inline-end: var(--ds-space-4);
+  }
+}
+
+/* =====================================================================
+   Unit page (unit.html)
+   Figma MoE-720 node 8485-60584 (values read from the Figma file).
+   ===================================================================== */
+.unit-page {
+  /* Figma: 60px header including its 1px bottom border */
+  --app-header-height: calc(var(--ds-space-16) - var(--ds-space-1) - var(--ds-space-0-25));
+  /* Table columns: each column = its Figma cell width + the 16px gap on its start side */
+  --unit-gap: var(--ds-space-4);
+  --unit-col-play: calc(var(--unit-gap) + var(--ds-space-8));             /* 16 + 32 */
+  --unit-col-num: calc(var(--unit-gap) + var(--ds-space-6));              /* 16 + 24 */
+  --unit-col-mandatory: calc(var(--unit-gap) + var(--ds-space-16) - var(--ds-space-2)); /* 16 + 56 */
+  --unit-col-wide: calc(var(--unit-gap) + var(--ds-space-16) + var(--ds-space-6));      /* 16 + 88 */
+  --unit-col-duration: calc(var(--unit-gap) + var(--ds-space-16) + var(--ds-space-2));  /* 16 + 72 */
+  --unit-col-toggle: calc(var(--unit-gap) * 2 + var(--ds-space-16) + var(--ds-space-10) + var(--ds-space-1) + var(--ds-space-0-75)); /* 16 + 111 + 16 */
+  --unit-meta-label: calc(var(--ds-space-16) + var(--ds-space-6));        /* 88 */
+}
+
+.app-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Figma: content starts 24px under the header; 65px from the table to the footer */
+.unit-main {
+  padding-top: var(--ds-space-6);
+  padding-bottom: calc(var(--ds-space-16) + var(--ds-space-0-25));
+}
+
+/* Underlined text link (no link class in DS) */
+.unit-link {
+  color: var(--ds-tone-1);
+  font-weight: var(--ds-font-weight-bold);
+  text-decoration: underline;
+}
+
+.unit-link:hover {
+  color: var(--ds-primary);
+}
+
+/* ===== Prototype-only: virtual tutor pill in the header (DS candidate) =====
+   Figma: 40px tall, Tone 7, avatar on a light green circle ("Light Green" #ceeedb has no DS token). */
+.unit-tutor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-0-5);
+  padding-inline-start: var(--ds-space-3);
+  background: var(--ds-tone-7);
+  border: none;
+  border-radius: var(--ds-space-5);
+  color: var(--ds-tone-1);
+  font-family: inherit;
+  font-size: var(--ds-font-size-5);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-21);
+  cursor: pointer;
+}
+
+.unit-tutor .ds-user-picture {
+  background: color-mix(in srgb, var(--ds-screen-green) 20%, var(--ds-tone-8));
+  color: var(--ds-screen-green);
+}
+
+.unit-tutor:hover {
+  background: var(--ds-tone-6);
+}
+
+/* ===== Prototype-only: unit summary card (DS has no card) ===== */
+.unit-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Figma strokes sit inside the frame: 24px from the outer edge to the content */
+  padding: calc(var(--ds-space-6) - var(--ds-space-0-25));
+  border: 1px solid var(--ds-tone-5);
+  border-radius: var(--ds-roundness-2);
+  background: var(--ds-background);
+}
+
+/* ===== Prototype-only: subject chip (DS candidate: filled badge) =====
+   Figma "Chips": 24px tall, Tone 7, Body 2 Highlight (14/18 bold). ds-badge is outlined. */
+.unit-subject {
+  padding: var(--ds-space-0-75) var(--ds-space-2);
+  background: var(--ds-tone-7);
+  border-radius: var(--ds-roundness-1);
+  font-size: var(--ds-font-size-4);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-18);
+}
+
+/* Figma H1 RTL: 48px bold, line height 1.2, right under the chip, 24px above the details.
+   English text in an RTL page: LTR for punctuation, right-aligned like the Hebrew around it. */
+.unit-title {
+  align-self: stretch;
+  margin: 0 0 var(--ds-space-6);
+  font-size: var(--ds-font-size-7);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-h3);
+  text-align: right;
+}
+
+/* Figma pairs: 88px label column, value fills the rest, 8px between rows, Body 1 (16/21) */
+.unit-meta {
+  display: grid;
+  grid-template-columns: var(--unit-meta-label) 1fr;
+  row-gap: var(--ds-space-2);
+  align-self: stretch;
+  margin: 0;
+  font-size: var(--ds-font-size-5);
+  line-height: var(--ds-line-height-21);
+}
+
+.unit-meta dt {
+  color: var(--ds-tone-2);
+}
+
+.unit-meta dd {
+  margin: 0;
+  text-align: right;
+}
+
+.unit-hero-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  align-self: stretch;
+  margin-top: var(--ds-space-4);
+  font-size: var(--ds-font-size-5);
+}
+
+/* ===== Prototype-only: lessons table with expandable rows (DS candidate) =====
+   ds-table is LTR-only (th text-align: left), 13px bold headers, 14px cells and has
+   no expandable rows. Figma: Body 2 (14/18) headers, Body 1 (16/21) cells, 16px column gaps. */
+.unit-lessons {
+  width: 100%;
+  margin-top: calc(var(--ds-space-10) + var(--ds-space-2)); /* Figma: 48px under the card */
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: var(--ds-font-size-5);
+  line-height: var(--ds-line-height-21);
+}
+
+.unit-col-play { width: var(--unit-col-play); }
+.unit-col-num { width: var(--unit-col-num); }
+.unit-col-mandatory { width: var(--unit-col-mandatory); }
+.unit-col-wide { width: var(--unit-col-wide); }
+.unit-col-duration { width: var(--unit-col-duration); }
+.unit-col-difficulty { width: var(--unit-col-duration); }
+.unit-col-toggle { width: var(--unit-col-toggle); }
+
+.unit-lessons th,
+.unit-lessons td {
+  padding: 0;
+  padding-inline-start: var(--unit-gap);
+  text-align: start;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Figma: 36px header row including its divider */
+.unit-lessons th {
+  height: calc(var(--ds-space-8) + var(--ds-space-1));
+  color: var(--ds-tone-2);
+  font-size: var(--ds-font-size-4);
+  font-weight: var(--ds-font-weight-regular);
+  line-height: var(--ds-line-height-18);
+  border-bottom: 1px solid var(--ds-tone-5);
+}
+
+.unit-lesson {
+  height: var(--ds-space-16);
+  border-bottom: 1px solid var(--ds-tone-5);
+}
+
+.unit-num {
+  color: var(--ds-tone-2);
+}
+
+.unit-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: var(--ds-font-weight-bold);
+}
+
+.unit-lessons ds-icon[name="check"] {
+  display: block;
+}
+
+.unit-skills {
+  font-weight: var(--ds-font-weight-regular);
+}
+
+/* Figma: the toggle is pinned to the end (left) edge, 16px in, open or closed */
+.unit-lessons .unit-toggle-cell {
+  padding-inline-end: var(--unit-gap);
+  text-align: end;
+}
+
+.unit-goals-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--ds-tone-1);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+.unit-goals-toggle ds-icon {
+  transition: transform var(--ds-duration-base);
+}
+
+.unit-goals-toggle:hover,
+.unit-goals-toggle[aria-expanded="true"] {
+  color: var(--ds-primary);
+}
+
+.unit-goals-toggle[aria-expanded="true"] {
+  font-weight: var(--ds-font-weight-bold);
+}
+
+.unit-goals-toggle[aria-expanded="true"] ds-icon {
+  transform: rotate(180deg);
+}
+
+/* Open row: Figma hides its divider; the grey panel follows directly */
+.unit-lesson:has(+ .unit-goals:not([hidden])) {
+  border-bottom-color: transparent;
+}
+
+/* Figma "Expanded panel": 160px, Tone 7, 20px padding, Body 2 (14/18), 16px between rows */
+.unit-goals {
+  background: var(--ds-tone-7);
+}
+
+.unit-lessons .unit-goals td {
+  /* 20px each side; 1px less at the bottom because the collapsed row border above adds 1px */
+  padding: var(--ds-space-5) 0 calc(var(--ds-space-5) - var(--ds-space-0-25));
+  padding-inline-start: var(--unit-col-play);
+  white-space: normal;
+}
+
+.unit-goals-list {
+  display: grid;
+  grid-template-columns: var(--unit-col-num) 1fr;
+  row-gap: var(--ds-space-4);
+  margin: 0;
+  font-size: var(--ds-font-size-4);
+  line-height: var(--ds-line-height-18);
+}
+
+.unit-goals-list dt,
+.unit-goals-list dd {
+  margin: 0;
+  padding-inline-start: var(--unit-gap);
+}
+
+.unit-goals-list dt {
+  color: var(--ds-tone-2);
+}
+
+/* ===== Unit page footer (Figma "Footer Content": 56px padding, 1200px column) =====
+   Logo on top; 32px below it one 40px row: links + copyright (start side) and social icons (end side). */
+.unit-footer {
+  padding: calc(var(--ds-space-10) + var(--ds-space-4)) var(--ds-space-6);
+  background: var(--ds-paper);
+}
+
+.unit-footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-8);
+  max-width: var(--app-content-width);
+  margin: 0 auto;
+}
+
+.unit-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-6);
+  align-self: stretch;
+}
+
+.unit-footer-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-1);
+  font-size: var(--ds-font-size-2);
+  line-height: var(--ds-line-height-16);
+}
+
+.unit-footer-links {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+
+.unit-footer-legal {
+  color: var(--ds-tone-1);
+}
+
+/* =====================================================================
+   Lesson shell (lesson.html)
+   Figma MoE-720 "Learning Component Page" (node 4742-72866), values read from the Figma file.
+   Uses the unit page header (.unit-page). The content loads in an iframe (lesson-content.html).
+   ===================================================================== */
+.lesson-page {
+  --lesson-rail: calc(var(--ds-space-16) + var(--ds-space-8) + var(--ds-space-1)); /* 100px */
+  --lesson-bar-height: calc(var(--ds-space-10) + var(--ds-space-1-5) + var(--ds-space-0-25)); /* 47px */
+  --lesson-step: calc(var(--ds-space-8) + var(--ds-space-0-75)); /* 35px */
+  /* Figma "Green" #5bc686 has no DS token: mixed from --ds-success */
+  --lesson-done: color-mix(in srgb, var(--ds-success) 65%, var(--ds-tone-8));
+  position: relative;
+  height: 100vh;
+  min-height: 0;
+}
+
+/* Rail on the start (right) side, content fills the rest */
+.lesson-layout {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--lesson-rail) 1fr;
+}
+
+/* ===== Prototype-only: progress stepper (DS candidate) =====
+   Figma "Student progress bar": 100px, divider on the content side, Body 2 texts (14/18). */
+.lesson-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--ds-space-4);
+  overflow-y: auto;
+  border-inline-end: 1px solid var(--ds-tone-5);
+  text-align: center;
+  font-size: var(--ds-font-size-4);
+  line-height: var(--ds-line-height-18);
+}
+
+.lesson-rail-title {
+  font-weight: var(--ds-font-weight-bold);
+}
+
+#lesson-progress {
+  margin-top: var(--ds-space-1);
+}
+
+.lesson-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--ds-space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lesson-steps li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Figma connector: 1 x 20px with 2px clear of each circle (59px circle to circle) */
+.lesson-steps li:not(:last-child)::after {
+  content: "";
+  width: 1px;
+  height: var(--ds-space-5);
+  margin: var(--ds-space-0-5) 0;
+  background: var(--ds-tone-5);
+}
+
+/* Figma: 35px circles, Button Label 2 (16px bold) numbers */
+.lesson-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--lesson-step);
+  height: var(--lesson-step);
+  border: 1px solid var(--ds-primary);
+  border-radius: 50%;
+  background: var(--ds-tone-8);
+  color: var(--ds-primary);
+  font-size: var(--ds-font-size-5);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-solid);
+  text-decoration: none;
+}
+
+a.lesson-step:hover {
+  background: var(--ds-primary-tint-10);
+}
+
+.lesson-step-current,
+a.lesson-step-current:hover {
+  background: var(--ds-primary);
+  color: var(--ds-primary-text-contrast);
+}
+
+.lesson-step-done {
+  border-color: var(--lesson-done);
+  color: var(--lesson-done);
+}
+
+/* Figma: flag 24px under the steps, 59 x 86 */
+.lesson-cheer-art {
+  display: block;
+  height: calc(var(--ds-space-16) + var(--ds-space-5) + var(--ds-space-0-5)); /* 86px */
+  margin-top: var(--ds-space-6);
+}
+
+.lesson-cheer {
+  margin-top: var(--ds-space-2);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+/* ===== Main: back bar + content iframe ===== */
+.lesson-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Figma "Breadcrumb": 47px, 24px side padding, pill then the current item 16px after it */
+.lesson-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  flex-shrink: 0;
+  box-sizing: border-box;
+  height: var(--lesson-bar-height);
+  padding: 0 var(--ds-space-6);
+  font-size: var(--ds-font-size-4);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-18);
+}
+
+/* Figma " Pill": 24px tall, Tone 6, 8px padding, arrow (16px) 4px from the label */
+.lesson-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  box-sizing: border-box;
+  height: var(--ds-space-6);
+  padding: 0 var(--ds-space-2);
+  background: var(--ds-tone-6);
+  border-radius: var(--ds-roundness-1);
+  color: var(--ds-tone-1);
+  text-decoration: none;
+}
+
+.lesson-back:hover {
+  background: var(--ds-tone-5);
+}
+
+.lesson-name {
+  color: var(--ds-tone-2);
+}
+
+.lesson-bar-spacer {
+  flex: 1;
+}
+
+/* ===== Prototype-only: "view as student" mode pill (DS candidate) =====
+   ds-badge has no icon slot. Primary tint, 24px like the back pill. */
+.lesson-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  box-sizing: border-box;
+  height: var(--ds-space-6);
+  padding: 0 var(--ds-space-2);
+  border-radius: var(--ds-roundness-1);
+  background: var(--ds-primary-tint-10);
+  color: var(--ds-primary);
+  white-space: nowrap;
+}
+
+/* Student view controls (teacher previews the unit as a student): label + control groups, separated by 1px dividers */
+.lesson-bar-group {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  font-weight: var(--ds-font-weight-regular);
+}
+
+.lesson-bar-label {
+  color: var(--ds-tone-2);
+  white-space: nowrap;
+}
+
+.lesson-bar-divider {
+  align-self: stretch;
+  width: 1px;
+  margin: var(--ds-space-3) 0;
+  background: var(--ds-tone-5);
+}
+
+/* ===== Prototype-only: RTL select menu as wide as its trigger (DS candidate) =====
+   The DS menu is a fixed 260px, anchored left, with left-aligned items (no RTL support).
+   Here it matches the trigger width, anchors to the start (right) edge and aligns items to the start. */
+/* Fixed trigger width so the longest option + check mark fit in the matching menu */
+.lesson-lang-select .ds-select {
+  width: calc(var(--ds-space-16) + var(--ds-space-10) + var(--ds-space-4)); /* 120px */
+}
+
+.lesson-lang-select .ds-select > span {
+  flex: 1;
+  text-align: start;
+}
+
+.lesson-lang-select .ds-select-menu {
+  width: 100%;
+  min-width: 0;
+  right: 0;
+  left: auto;
+}
+
+.lesson-lang-select .ds-select-item {
+  text-align: start;
+}
+
+.lesson-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  display: block;
+}
+
+/* =====================================================================
+   Lesson content (lesson-content.html, inside the shell's iframe)
+   From a screenshot of the live app: centered title, 16:9 avatar stage, disclaimer.
+   ===================================================================== */
+.lesson-content {
+  --lesson-stage-width: calc(var(--ds-space-16) * 11.25 + var(--ds-space-2)); /* 728px, 16:9 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  /* Live app: 20px on the start (rail) side only, so the stage sits a little off center */
+  padding: calc(var(--ds-space-16) + var(--ds-space-5)) 0 var(--ds-space-5);
+  padding-inline-start: var(--ds-space-5);
+}
+
+/* Live app: 40px title (no DS size; built from h3 + size-5). The sparkle hangs outside
+   the text, so the text itself is what is centered. */
+.lesson-content-title {
+  position: relative;
+  margin: 0 0 var(--ds-space-4-5);
+  font-size: calc(var(--ds-font-size-h3) + var(--ds-font-size-5));
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-solid);
+}
+
+.lesson-content-title ds-icon {
+  position: absolute;
+  top: calc(-1 * var(--ds-space-1-5));
+  inset-inline-end: calc(100% + var(--ds-space-1));
+  color: var(--ds-primary);
+}
+
+/* ===== Prototype-only: avatar stage (video placeholder) ===== */
+.lesson-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--lesson-stage-width);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--ds-roundness-2);
+  /* Warm cream from the live app (shows while the image loads); no DS token, mixed from the accent */
+  background: color-mix(in srgb, var(--ds-accent) 16%, var(--ds-tone-8));
+}
+
+/* The still frame already has the bottom shade baked in */
+.lesson-stage-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lesson-start {
+  position: absolute;
+  bottom: var(--ds-space-3-5);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 1;
+}
+
+.lesson-disclaimer {
+  margin: auto 0 0;
+  padding-top: var(--ds-space-10);
+  color: var(--ds-tone-2);
+  font-size: var(--ds-font-size-2);
+}

@@ -152,3 +152,109 @@
   window.addEventListener('scroll', updateHeader, { passive: true });
   updateHeader();
 })();
+
+// ===== Prototype-only: dark / light version switch (landing.html <-> landing-light.html) =====
+// The floating panel opens the other version at the same point of the page.
+// Language carries over on its own (it is saved in localStorage above).
+(function () {
+  var versionSwitch = document.getElementById('proto-version');
+  if (!versionSwitch) return;
+
+  var SCROLL_KEY = 'proto_version_scroll';
+
+  function scrollRatio() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    return max > 0 ? window.scrollY / max : 0;
+  }
+
+  versionSwitch.addEventListener('ds-change', function (e) {
+    try { sessionStorage.setItem(SCROLL_KEY, String(scrollRatio())); } catch (err) {}
+    window.location.href = e.detail.value;
+  });
+
+  // Coming from the other version: go to the same relative point (the two pages differ a little in height)
+  var saved = null;
+  try {
+    saved = sessionStorage.getItem(SCROLL_KEY);
+    sessionStorage.removeItem(SCROLL_KEY);
+  } catch (err) {}
+  if (saved !== null) {
+    window.addEventListener('load', function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: parseFloat(saved) * max, behavior: 'instant' });
+    });
+  }
+})();
+
+// ===== Unit page (unit.html) =====
+// Renders the unit and its lessons from data.js. Static front end: the only
+// working controls are the play buttons, which open the lesson page.
+(function () {
+  var body = document.getElementById('unit-lessons-body');
+  if (!body) return;
+
+  var unit = window.UNIT_DATA;
+  var HINT_ARROW_UP = '<svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M0 9L5.4 2Q7 0 8.6 2L14 9Z" fill="currentColor"/></svg>';
+
+  function setText(id, text) {
+    document.getElementById(id).textContent = text;
+  }
+
+  function esc(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  setText('teacher-name', window.APP_DATA.teacher.fullName);
+  setText('unit-subject', unit.subject);
+  setText('unit-title', unit.title);
+  setText('unit-goals', unit.goals);
+  setText('unit-topic', unit.topic);
+  setText('unit-subtopic', unit.subtopic);
+
+  var goalsHtml = unit.levelGoals.map(function (g) {
+    return '<dt>' + esc(g.level) + '</dt><dd><span dir="ltr">' + esc(g.text) + '</span></dd>';
+  }).join('');
+
+  body.innerHTML = unit.lessons.map(function (l, i) {
+    var n = i + 1;
+    var goalsId = 'unit-goals-' + n;
+    return '<tr class="unit-lesson">' +
+      '<td>' +
+        '<div class="ds-hint-trigger">' +
+          '<a class="ds-btn ds-btn-md ds-btn-secondary ds-btn-icon" href="lesson.html" aria-label="לנסות שיעור זה כתלמיד: ' + esc(l.name) + '">' +
+            '<ds-icon name="play" size="24"></ds-icon></a>' +
+          '<div class="ds-hint ds-hint-bottom" aria-hidden="true">' +
+            '<div class="ds-hint-body">לנסות שיעור זה כתלמיד</div>' +
+            '<div class="ds-hint-arrow">' + HINT_ARROW_UP + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</td>' +
+      '<td class="unit-num">' + n + '</td>' +
+      '<td class="unit-name"><span dir="ltr">' + esc(l.name) + '</span></td>' +
+      '<td>' + (l.mandatory ? '<ds-icon name="check" size="24" role="img" aria-label="חובה"></ds-icon>' : '') + '</td>' +
+      '<td>' + esc(l.purpose) + '</td>' +
+      '<td><a class="unit-link unit-skills" href="#">' + l.skills + ' מיומנויות</a></td>' +
+      '<td>' + esc(l.mastery) + '</td>' +
+      '<td>' + l.minutes + ' דק׳</td>' +
+      '<td>' + l.difficulty + '</td>' +
+      '<td class="unit-toggle-cell">' +
+        '<button class="unit-goals-toggle" type="button" aria-expanded="false" aria-controls="' + goalsId + '">' +
+          '<span>יעדי הלמידה</span><ds-icon name="chevron-down" size="24"></ds-icon>' +
+        '</button>' +
+      '</td>' +
+    '</tr>' +
+    '<tr class="unit-goals" id="' + goalsId + '" hidden>' +
+      '<td colspan="10"><dl class="unit-goals-list">' + goalsHtml + '</dl></td>' +
+    '</tr>';
+  }).join('');
+
+  // Static, as in the Figma frame: the first lesson is shown open
+  var first = body.querySelector('.unit-goals-toggle');
+  first.setAttribute('aria-expanded', 'true');
+  document.getElementById(first.getAttribute('aria-controls')).hidden = false;
+})();
+
+
+

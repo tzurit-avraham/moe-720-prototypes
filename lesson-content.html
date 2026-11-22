@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Avatar</title>
+  <link rel="stylesheet" href="ds/styles.css">
+  <!-- Prototype-only: Hebrew font. DS font (Lato) has no Hebrew glyphs. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Lesson content component, shown inside the iframe of lesson.html.
+       Built from a screenshot of the live app (720en.kaltura.app content-component view). Static front end. -->
+  <main class="lesson-content">
+    <h1 class="lesson-content-title" dir="ltr"><ds-icon name="gen-ai" size="24"></ds-icon>Learning Avatar</h1>
+
+    <section class="lesson-stage" aria-label="Learning Avatar">
+      <!-- Still frame cropped from a screenshot of the live app (stands in for the avatar video) -->
+      <img class="lesson-stage-image" src="assets/learning-avatar.png" alt="">
+      <button class="ds-btn ds-btn-md ds-btn-primary lesson-start" type="button" dir="ltr"><ds-icon name="sound-wave" size="16"></ds-icon>Start conversation</button>
+    </section>
+
+    <p class="lesson-disclaimer" dir="ltr">AI-generated content may contain errors or omissions.</p>
+  </main>
+
+  <script src="ds/ds-icons.js"></script>
+  <script src="ds/ds.js"></script>
+</body>
+</html>

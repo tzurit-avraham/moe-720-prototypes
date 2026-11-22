@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>שיעור - Kaltura</title>
+  <link rel="stylesheet" href="ds/styles.css">
+  <!-- Prototype-only: Hebrew font. DS font (Lato) has no Hebrew glyphs. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Lesson shell: Figma MoE-720 "Learning Component Page" (node 4742-72866). Static front end.
+       The lesson content loads in the iframe (lesson-content.html). -->
+  <div class="app unit-page lesson-page">
+
+    <header class="app-header">
+      <a href="index.html"><img class="app-logo" src="assets/kaltura-logo-cropped.svg" alt="Kaltura"></a>
+      <nav class="app-nav" aria-label="ניווט ראשי">
+        <a href="index.html" class="app-nav-link">בית</a>
+        <a href="unit.html" class="app-nav-link">כל יחידות הלימוד</a>
+        <a href="#" class="app-nav-link">תיעוד פגישת מנטורינג</a>
+        <a href="#" class="app-nav-link">שאלון פעלנות</a>
+      </nav>
+      <div class="app-header-spacer"></div>
+      <button class="app-user-menu" type="button">
+        <ds-icon name="user" size="24"></ds-icon>
+        <span>יעל הרפז</span>
+        <ds-icon name="chevron-down" size="16"></ds-icon>
+      </button>
+      <button class="unit-tutor" type="button">
+        <span>המורה וירטואלי</span>
+        <!-- Figma shows an illustrated avatar; no image asset yet, so a DS user picture with an icon stands in -->
+        <span class="ds-user-picture ds-user-picture-md ds-user-picture-round"><ds-icon name="gen-ai" size="24"></ds-icon></span>
+      </button>
+    </header>
+
+    <div class="lesson-layout">
+      <aside class="lesson-rail" aria-label="התקדמות ביחידה">
+        <span class="lesson-rail-title">התקדמות</span>
+        <span id="lesson-progress">2/8</span>
+        <ol class="lesson-steps">
+          <li><span class="lesson-step lesson-step-done"><ds-icon name="check" size="24"></ds-icon></span></li>
+          <li><span class="lesson-step lesson-step-done"><ds-icon name="check" size="24"></ds-icon></span></li>
+          <li><span class="lesson-step lesson-step-current" aria-current="step">3</span></li>
+          <li><span class="lesson-step">4</span></li>
+          <li><span class="lesson-step"><ds-icon name="lock" size="24"></ds-icon></span></li>
+          <li><span class="lesson-step"><ds-icon name="lock" size="24"></ds-icon></span></li>
+          <li><span class="lesson-step"><ds-icon name="lock" size="24"></ds-icon></span></li>
+          <li><span class="lesson-step"><ds-icon name="lock" size="24"></ds-icon></span></li>
+        </ol>
+        <!-- Cropped from a screenshot of the live app; replace with the original asset when available -->
+        <img class="lesson-cheer-art" src="assets/lesson-flag.png" alt="">
+        <span class="lesson-cheer">מצוין,<br>עבודה מעולה!</span>
+      </aside>
+
+      <main class="lesson-main">
+        <div class="lesson-bar">
+          <a class="lesson-back" href="unit.html"><ds-icon name="arrow-right" size="16"></ds-icon><span>חזרה ל-<span dir="ltr">English</span></span></a>
+          <span class="lesson-name" dir="ltr">Unit 1: Send a Message!</span>
+          <div class="lesson-bar-spacer"></div>
+          <span class="lesson-mode-pill"><ds-icon name="visible" size="16"></ds-icon><span>צפייה כתלמיד</span></span>
+          <span class="lesson-bar-divider" aria-hidden="true"></span>
+          <!-- Student view settings (teacher previews as a student): level (DS segmented) and the student's native language (DS select) -->
+          <div class="lesson-bar-group">
+            <span class="lesson-bar-label" id="lesson-level-label">רמה</span>
+            <div class="ds-segmented" role="radiogroup" aria-labelledby="lesson-level-label">
+              <button class="ds-segmented-item" role="radio" aria-checked="true"><span>A1</span></button>
+              <button class="ds-segmented-item" role="radio" aria-checked="false"><span>A2</span></button>
+              <button class="ds-segmented-item" role="radio" aria-checked="false"><span>B1</span></button>
+              <button class="ds-segmented-item" role="radio" aria-checked="false"><span>B2</span></button>
+            </div>
+          </div>
+          <span class="lesson-bar-divider" aria-hidden="true"></span>
+          <div class="lesson-bar-group">
+            <span class="lesson-bar-label" id="lesson-lang-label">שפת אם</span>
+            <div class="ds-select-wrapper lesson-lang-select">
+              <button class="ds-select" aria-haspopup="listbox" aria-labelledby="lesson-lang-label">
+                <span>עברית</span>
+                <ds-icon class="ds-select-chevron" name="chevron-down" size="16"></ds-icon>
+              </button>
+              <div class="ds-select-menu" role="listbox">
+                <button class="ds-select-item" role="option" aria-selected="true" data-value="he"><span class="ds-select-item-label">עברית</span><ds-icon class="ds-select-item-trailing" name="check" size="16"></ds-icon></button>
+                <button class="ds-select-item" role="option" data-value="ar"><span class="ds-select-item-label">ערבית</span></button>
+                <button class="ds-select-item" role="option" data-value="en"><span class="ds-select-item-label">אנגלית</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <iframe class="lesson-frame" src="lesson-content.html" title="תוכן השיעור"></iframe>
+      </main>
+    </div>
+
+
+  </div>
+
+  <script src="ds/ds-icons.js"></script>
+  <script src="ds/ds.js"></script>
+</body>
+</html>

@@ -170,3 +170,46 @@ window.LANDING_I18N = {
     trustMoe: "مزود وكيل تعلم معتمد لدى وزارة التربية والتعليم"
   }
 };
+
+// Design concepts for concepts.html (the picker panel). id = class on the page root.
+// All use the graphic language of the Figma "Illustrations" file: flat brand shapes,
+// the blue ribbon wave, speech bubbles, tilted cards and the red play card.
+window.CONCEPTS = [
+  { id: "d1", theme: "dark",  name: "זרקור",          desc: "המראה של kaltura.com: זוהר מותגי, כרטיס וידאו ואלמנטים מהאיורים שמרחפים סביבו." },
+  { id: "d2", theme: "dark",  name: "הסרט הכחול",     desc: "סרט כחול גלי מהאיורים זורם לאורך העמוד ומחבר בין הפרקים. מינימליסטי, כרטיסים עם מסגרת דקה." },
+  { id: "d3", theme: "dark",  name: "שיחה",           desc: "העמוד כשיחה: בכותרת קאלי ותלמידה מדברות, והבעיות מוצגות כבועות צ׳אט." },
+  { id: "d4", theme: "dark",  name: "בנטו",           desc: "רשת של אריחים צבעוניים בגדלים שונים, כל רעיון באריח משלו, כמו לוח מוצר." },
+  { id: "d5", theme: "dark",  name: "קולנוע",         desc: "הווידאו הוא הבמה: הכותרת על הפוסטר, כרטיס פליי אדום גדול, והעקרונות כפס סרט נגלל." },
+  { id: "l1", theme: "light", name: "שמיים",          desc: "רקע תכלת כמו בקובץ האיורים, האיור הראשי לצד הכותרת, כרטיסים לבנים ונקיים." },
+  { id: "l2", theme: "light", name: "קולאז׳",          desc: "כרטיסים מוטים כמו מדבקות עם סלוטייפ, קשקושים ובועות. שובב ומלא אנרגיה." },
+  { id: "l3", theme: "light", name: "מגזין",          desc: "טיפוגרפיה ענקית, הדגשת מרקר צהובה ומספרים במתאר. נקי, בטוח, מעט איורים." },
+  { id: "l4", theme: "light", name: "בלוקים של צבע",  desc: "כל פרק בצבע מותג מלא, צהוב, ורוד, תכלת ואדום, עם כרטיסים לבנים מעליו." },
+  { id: "l5", theme: "light", name: "ספר סיפורים",    desc: "העמוד כספר קומיקס: פאנלים עם מסגרת וצל, פרקים ובועות דיבור. ״זה כל הסיפור״ ממש." }
+];
+
+// Unit page (unit.html): one learning unit and its lessons.
+window.UNIT_DATA = {
+  subject: "English",
+  title: "Unit 1: Send a Message!",
+  goals: "Describe your smartphone and phone habits (There is / There are, Present Simple, Who / What questions), scan forum replies, read and explain a survey bar graph, and read about teens who use phones to help others.",
+  topic: "Technology & Digital Life",
+  subtopic: "Smartphones & Online Communication",
+
+  // Learning goals per CEFR level, shown when a lesson row is expanded
+  levelGoals: [
+    { level: "A1", text: "Can understand some words and expressions when people are talking about themselves, family, school, hobbies or surroundings" },
+    { level: "A2", text: "I can say hello and goodbye in English" },
+    { level: "B1", text: "I can understand some English words when people talk about themselves, their family, school and hobbies" },
+    { level: "B2", text: "I can understand some English words when people talk about themselves, their family, school and hobbies" }
+  ],
+
+  lessons: [
+    { name: "Talk to Jerry", mandatory: false, purpose: "הוראה", skills: 4, mastery: "בסיסי", minutes: 15, difficulty: 2 },
+    { name: "Talk to Jerry", mandatory: false, purpose: "הוראה", skills: 4, mastery: "בסיסי", minutes: 15, difficulty: 2 },
+    { name: "What Do People Do with Their Phones?", mandatory: false, purpose: "תרגול", skills: 4, mastery: "בסיסי", minutes: 18, difficulty: 3 },
+    { name: "Danny Helps", mandatory: true, purpose: "תרגול", skills: 4, mastery: "ממוצע", minutes: 12, difficulty: 3 },
+    { name: "Debby and Roy Help", mandatory: true, purpose: "הוראה", skills: 4, mastery: "ממוצע", minutes: 14, difficulty: 2 },
+    { name: "Ask Like a Reporter", mandatory: false, purpose: "תרגול", skills: 4, mastery: "מתקדם", minutes: 10, difficulty: 2 },
+    { name: "My Message to Jerry", mandatory: false, purpose: "תרגול", skills: 4, mastery: "מתקדם", minutes: 10, difficulty: 2 }
+  ]
+};

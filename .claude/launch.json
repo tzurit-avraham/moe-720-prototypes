@@ -12,6 +12,12 @@
       "runtimeExecutable": "/usr/bin/ruby",
       "runtimeArgs": ["-run", "-ehttpd", "/tmp/landing-check", "-p8092"],
       "port": 8092
+    },
+    {
+      "name": "dashboard-preview-copy",
+      "runtimeExecutable": "/usr/bin/ruby",
+      "runtimeArgs": ["-run", "-ehttpd", "/tmp/proto-preview", "-p8091"],
+      "port": 8091
     }
   ]
 }

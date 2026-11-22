@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48" fill="none">
+  <!-- Hand-drawn squiggle from the Figma "Illustrations" style, blue, for underlines on light pages -->
+  <path d="M6 30 C 14 8, 24 8, 28 28 S 40 40, 46 20 S 60 6, 64 26 S 78 38, 86 22 C 92 12, 100 14, 114 18"
+        stroke="#006EFA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

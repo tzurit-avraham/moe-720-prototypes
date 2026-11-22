@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" fill="none">
+  <!-- Thick wavy brand ribbon, redrawn from the Figma "Illustrations" cover style -->
+  <path d="M-20 230 C 140 40, 300 40, 420 170 S 700 330, 860 170 S 1080 30, 1220 120"
+        stroke="#006EFA" stroke-width="72" stroke-linecap="round"/>
+</svg>

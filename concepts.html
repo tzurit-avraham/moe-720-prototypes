@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kali landing - 10 design concepts</title>
+  <link rel="stylesheet" href="ds/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700;800&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="concepts.css">
+</head>
+<body>
+  <!-- 10 design concepts (5 dark, 5 light) for the Kali landing page, on one page.
+       Same content as landing.html; each concept is a class on the root (cx-d1 ... cx-l5),
+       set by app.js from ?c=... in the URL and the floating picker. Styles: concepts.css.
+       Graphic language: the Figma "Illustrations" file (cover in assets/illustrations/kaltura-cover.png),
+       its pieces redrawn as the "graphic kit" (cx-*) below. Each concept shows only the pieces it needs. -->
+  <div class="landing cx-d1" id="landing" dir="rtl" lang="he" data-theme="dark">
+
+    <!-- ===== Concept picker (prototype tool, not part of the page) ===== -->
+    <aside class="cx-picker" id="cx-picker" aria-label="הצעות עיצוב">
+      <div class="cx-picker-head">
+        <span class="cx-picker-kicker">הצעות עיצוב</span>
+        <button class="ds-btn ds-btn-sm ds-btn-secondary ds-btn-borderless ds-btn-icon" id="cx-collapse" aria-label="מזער" aria-expanded="true"><ds-icon name="chevron-down" size="16"></ds-icon></button>
+      </div>
+      <div class="cx-picker-body">
+        <div class="cx-picker-title">
+          <span class="cx-picker-id" id="cx-id">D1</span>
+          <strong id="cx-name">זרקור</strong>
+        </div>
+        <p class="cx-picker-desc" id="cx-desc"></p>
+        <div class="cx-picker-row">
+          <span class="cx-picker-label">כהה</span>
+          <div class="ds-segmented" role="radiogroup" aria-label="הצעות כהות" id="cx-dark">
+            <button class="ds-segmented-item" role="radio" aria-checked="true" data-value="d1"><span>1</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="d2"><span>2</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="d3"><span>3</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="d4"><span>4</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="d5"><span>5</span></button>
+          </div>
+        </div>
+        <div class="cx-picker-row">
+          <span class="cx-picker-label">בהיר</span>
+          <div class="ds-segmented" role="radiogroup" aria-label="הצעות בהירות" id="cx-light">
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="l1"><span>1</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="l2"><span>2</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="l3"><span>3</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="l4"><span>4</span></button>
+            <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="l5"><span>5</span></button>
+          </div>
+        </div>
+        <div class="cx-picker-nav">
+          <button class="ds-btn ds-btn-sm ds-btn-secondary" id="cx-prev"><ds-icon name="chevron-right" size="16"></ds-icon> הקודמת</button>
+          <span class="cx-picker-count" id="cx-count">1 / 10</span>
+          <button class="ds-btn ds-btn-sm ds-btn-secondary" id="cx-next">הבאה <ds-icon name="chevron-left" size="16"></ds-icon></button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== Sticky header ===== -->
+    <header class="landing-header">
+      <div class="landing-brand">
+        <span class="landing-demo-badge" data-i18n="tagBadge">DEMO</span>
+        <span data-i18n="brandText">פרויקט 720 · סביבת הדגמה חיה</span>
+      </div>
+
+      <div class="landing-header-actions">
+        <div class="ds-segmented" role="radiogroup" aria-label="Language" id="landing-lang">
+          <button class="ds-segmented-item" role="radio" aria-checked="true" data-value="he"><span>עברית</span></button>
+          <button class="ds-segmented-item" role="radio" aria-checked="false" data-value="ar"><span>العربية</span></button>
+        </div>
+        <a href="index.html" class="landing-btn landing-btn-blue">
+          <span data-i18n="ctaLogin">כניסה למערכת</span>
+          <ds-icon class="landing-arrow" name="arrow-left" size="16"></ds-icon>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ===== 1. Promise ===== -->
+      <section class="landing-block landing-hero">
+        <div class="landing-glow landing-glow-hero" aria-hidden="true"></div>
+
+        <div class="landing-hero-intro">
+          <p class="landing-label" data-i18n="heroBadge">סוכנת למידה אישית מבוססת AI · פרויקט 720</p>
+          <h1 class="landing-hero-title">
+            <span class="landing-accent" dir="ltr">Kali.</span>
+            <span class="cx-mark" data-i18n="heroTitle">זה כל הסיפור.</span>
+          </h1>
+          <p class="landing-hero-text" data-i18n="heroSubtitle">כל הכיתה לומדת את אותו הסיפור. כל תלמיד לומד אותו ברמה שלו. והמורה רואה הכול.</p>
+
+          <div class="landing-hero-actions">
+            <a href="index.html" class="landing-btn landing-btn-main">
+              <span data-i18n="heroCtaBtn">היכנסו לסביבת ההדגמה</span>
+              <ds-icon class="landing-arrow" name="arrow-left" size="16"></ds-icon>
+            </a>
+            <a href="#video" class="landing-btn landing-btn-outline">
+              <ds-icon name="play" size="16"></ds-icon>
+              <span data-i18n="heroCardPill">צפו בקאלי מלמדת</span>
+            </a>
+          </div>
+          <p class="landing-note landing-hero-note" data-i18n="heroCtaNote">פתוחה למורים, למנהלים ולצוותי פדגוגיה</p>
+        </div>
+
+        <!-- Graphic kit: each concept shows and places only some of these -->
+        <div class="cx-visual" aria-hidden="true">
+          <img class="cx-ribbon" src="assets/illustrations/ribbon.svg" alt="">
+          <img class="cx-cover" src="assets/illustrations/kaltura-cover.png" alt="">
+          <a href="#video" class="landing-hero-card cx-poster" tabindex="-1">
+            <img class="landing-hero-card-media" src="https://yairn-pg.kalcloud.com/kali-720-d534e841/vid/kali-trailer-v2-poster.jpg" alt="">
+          </a>
+          <!-- Kali speaks English (the lesson language), so the chat is in English on purpose -->
+          <div class="cx-chat" dir="ltr">
+            <span class="cx-msg cx-msg-kali">Hi Noa! Ready for chapter 3 of our story?</span>
+            <span class="cx-msg cx-msg-student">Yes! I learned five new words.</span>
+            <span class="cx-msg cx-msg-kali">Great! Let's say them out loud.</span>
+          </div>
+          <span class="cx-bubble cx-bubble-heart"><ds-icon name="heart"></ds-icon></span>
+          <span class="cx-bubble cx-bubble-squiggle"><img src="assets/illustrations/squiggle-white.svg" alt=""></span>
+          <span class="cx-play"><ds-icon name="play"></ds-icon></span>
+          <span class="cx-dot cx-dot-yellow"></span>
+          <span class="cx-dot cx-dot-green"></span>
+          <span class="cx-dot cx-dot-pink"></span>
+        </div>
+      </section>
+
+      <!-- ===== 2. The problem ===== -->
+      <section class="landing-block cx-problem">
+        <div class="landing-glow landing-glow-pink" aria-hidden="true"></div>
+
+        <div class="landing-head">
+          <p class="landing-label" data-i18n="problemEyebrow">האתגר</p>
+          <h2 class="landing-title" data-i18n="problemTitle">כיתה אחת. ארבע רמות. שיעור אחד.</h2>
+          <p class="landing-lead" data-i18n="problemText">בשיעור אנגלית רגיל יושבים זה לצד זה תלמידים שרק מתחילים ותלמידים שכבר קוראים בשטף. כשכולם לומדים באותה רמה:</p>
+        </div>
+
+        <div class="landing-panel">
+          <ul class="landing-rows">
+            <li class="landing-row">
+              <span class="landing-row-icon landing-tint-yellow"><ds-icon name="neutral"></ds-icon></span>
+              <span data-i18n="problem1">התלמידים המתקדמים משתעממים</span>
+            </li>
+            <li class="landing-row">
+              <span class="landing-row-icon landing-tint-pink"><ds-icon name="sad"></ds-icon></span>
+              <span data-i18n="problem2">התלמידים המתחילים נשארים מאחור</span>
+            </li>
+            <li class="landing-row">
+              <span class="landing-row-icon landing-tint-sky"><ds-icon name="group"></ds-icon></span>
+              <span data-i18n="problem3">ולמורה אין דרך להגיע לכולם</span>
+            </li>
+          </ul>
+
+          <div class="landing-panel-intro">
+            <span class="cx-spot cx-spot-aha" aria-hidden="true"><ds-icon name="light"></ds-icon></span>
+            <h3 class="landing-panel-title" data-i18n="problemClose">קאלי נבנתה בדיוק בשביל זה.</h3>
+            <a href="#video" class="landing-btn landing-btn-blue">
+              <span data-i18n="problemCta">ראו איך זה עובד</span>
+              <ds-icon class="landing-arrow" name="arrow-left" size="16"></ds-icon>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ribbon band between chapters (only "The blue ribbon" concept shows it) -->
+      <img class="cx-band" src="assets/illustrations/ribbon.svg" alt="" aria-hidden="true">
+
+      <!-- ===== 3. Kali in action (video) ===== -->
+      <section class="landing-block landing-block-paper cx-video" id="video">
+        <div class="landing-glow landing-glow-red" aria-hidden="true"></div>
+
+        <div class="landing-head">
+          <p class="landing-label" data-i18n="videoEyebrow">קאלי בפעולה</p>
+          <h2 class="landing-title" data-i18n="videoTitle">ראו את קאלי מלמדת: שיעור אמיתי ב־2 דקות</h2>
+          <p class="landing-lead" data-i18n="videoSub">צפו איך קאלי מובילה שיעור מתחילתו ועד סופו, ומאפשרת לכל תלמיד להתקדם בקצב שלו.</p>
+        </div>
+
+        <div class="landing-video">
+          <div class="landing-video-frame">
+            <video controls playsinline preload="metadata"
+              poster="https://yairn-pg.kalcloud.com/kali-720-d534e841/vid/kali-trailer-v2-poster.jpg"
+              src="https://yairn-pg.kalcloud.com/kali-720-d534e841/vid/kali-trailer-v6-he.mp4"></video>
+          </div>
+          <div class="landing-video-caption">
+            <span class="landing-video-tag">
+              <ds-icon name="play" size="16"></ds-icon>
+              <span data-i18n="videoTag">שיעור אנגלית · כיתות ז׳–ח׳</span>
+            </span>
+            <span data-i18n="videoTime">אורך הסרטון: 2:04 דק׳</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 4. How it works ===== -->
+      <section class="landing-block cx-pillars">
+        <div class="landing-head">
+          <p class="landing-label" data-i18n="pillarsEyebrow">איך זה עובד</p>
+          <h2 class="landing-title" data-i18n="pillarsTitle">שלושה עקרונות שעושים את ההבדל</h2>
+          <p class="landing-lead" data-i18n="pillarsSub">עלילה משותפת, הוראה מותאמת לכל תלמיד, ושליטה מלאה בידי המורה.</p>
+        </div>
+
+        <div class="landing-pillars">
+          <article class="landing-pillar landing-pillar-blue">
+            <div class="landing-pillar-top">
+              <span class="landing-pillar-num">01</span>
+              <span class="cx-spot cx-spot-story" aria-hidden="true"><img src="assets/illustrations/ribbon.svg" alt=""></span>
+            </div>
+            <h3 class="landing-card-title" data-i18n="p1Title">סיפור אחד לכל הכיתה</h3>
+            <p class="landing-card-text" data-i18n="p1Desc">תשע יחידות לימוד סביב עלילה אחת. כל הכיתה עוקבת אחרי אותו סיפור ויכולה לדבר עליו יחד, אבל הטקסט, המשימות ואוצר המילים מותאמים לכל תלמיד באחת מארבע רמות.</p>
+            <div class="landing-chips">
+              <span class="ds-tag">Pre-A1</span>
+              <span class="ds-tag">A1</span>
+              <span class="ds-tag">A2</span>
+              <span class="ds-tag">B1</span>
+            </div>
+          </article>
+
+          <article class="landing-pillar landing-pillar-pink">
+            <div class="landing-pillar-top">
+              <span class="landing-pillar-num">02</span>
+              <span class="cx-spot cx-spot-talk" aria-hidden="true"><img src="assets/illustrations/squiggle-white.svg" alt=""></span>
+            </div>
+            <h3 class="landing-card-title" data-i18n="p2Title">קאלי מלמדת, פנים מול פנים</h3>
+            <p class="landing-card-text" data-i18n="p2Desc">לא עוד צ'אטבוט בפינת המסך. קאלי היא מורה-אוואטר שמובילה את השיעור: מדברת, שואלת, מקשיבה ומלווה את התלמיד בכל שלב, מהגדרת המטרה ועד בדיקת השליטה.</p>
+            <div class="landing-chips">
+              <span class="ds-tag" data-i18n="chipGoal">מטרה</span>
+              <span class="ds-tag" data-i18n="chipWords">מילים</span>
+              <span class="ds-tag" data-i18n="chipQuestions">שאלות</span>
+              <span class="ds-tag" data-i18n="chipPronounce">הגייה</span>
+              <span class="ds-tag" data-i18n="chipMastery">שליטה</span>
+            </div>
+          </article>
+
+          <article class="landing-pillar landing-pillar-yellow">
+            <div class="landing-pillar-top">
+              <span class="landing-pillar-num">03</span>
+              <span class="cx-spot cx-spot-dash" aria-hidden="true"><ds-icon name="analytics"></ds-icon></span>
+            </div>
+            <h3 class="landing-card-title" data-i18n="p3Title">המורה תמיד בשליטה</h3>
+            <p class="landing-card-text" data-i18n="p3Desc">דשבורד בזמן אמת מראה מי מתקדם, מי נתקע ומי צריך עזרה עכשיו, ומציע תובנות מוכנות לפגישת המנטורינג הבאה.</p>
+            <div class="landing-chips">
+              <span class="ds-tag" data-i18n="chipRealtime">מעקב בזמן אמת</span>
+              <span class="ds-tag" data-i18n="chipAlerts">התראות קושי</span>
+              <span class="ds-tag" data-i18n="chipInsights">תובנות פדגוגיות</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===== 5. Try it yourself ===== -->
+      <section class="landing-block landing-block-paper cx-features">
+        <div class="landing-glow landing-glow-sky" aria-hidden="true"></div>
+
+        <div class="landing-head">
+          <p class="landing-label" data-i18n="demoEyebrow">נסו בעצמכם</p>
+          <h2 class="landing-title" data-i18n="demoExpTitle">מה מחכה לכם בסביבת ההדגמה</h2>
+          <p class="landing-lead" data-i18n="demoExpSub">התחברו וחוו את שני צידי הכיתה: את השיעור דרך עיני התלמיד, ואת התמונה המלאה דרך עיני המורה.</p>
+        </div>
+
+        <div class="landing-features">
+          <div class="landing-feature">
+            <span class="landing-feature-icon landing-tint-sky"><ds-icon name="playlist"></ds-icon></span>
+            <h3 class="landing-card-title" data-i18n="w1Title">יחידות הלימוד</h3>
+            <p class="landing-card-text" data-i18n="w1Desc">עיינו ביחידות שנבנו לפי תוכנית הלימודים, עם משימות כתיבה, דיבור והאזנה.</p>
+          </div>
+
+          <div class="landing-feature">
+            <span class="landing-feature-icon landing-tint-yellow"><ds-icon name="gen-ai"></ds-icon></span>
+            <h3 class="landing-card-title" data-i18n="w2Title">שיעור עם קאלי</h3>
+            <p class="landing-card-text" data-i18n="w2Desc">היכנסו לנעלי התלמיד: נהלו שיחה פנים מול פנים עם קאלי וקבלו משוב מיידי על הגייה והבנה.</p>
+          </div>
+
+          <div class="landing-feature">
+            <span class="landing-feature-icon landing-tint-green"><ds-icon name="analytics"></ds-icon></span>
+            <h3 class="landing-card-title" data-i18n="w3Title">דשבורד המורה</h3>
+            <p class="landing-card-text" data-i18n="w3Desc">ראו את תמונת המצב של הכיתה במבט אחד: מי בכל רמה, מי זקוק לעזרה ואיך מתקדמת כל יחידה.</p>
+          </div>
+
+          <div class="landing-feature">
+            <span class="landing-feature-icon landing-tint-pink"><ds-icon name="notes"></ds-icon></span>
+            <h3 class="landing-card-title" data-i18n="w4Title">פגישות מנטורינג</h3>
+            <p class="landing-card-text" data-i18n="w4Desc">תעדו פגישות אישיות, הגדירו יעדים לכל תלמיד ושמרו על רצף פדגוגי מפגישה לפגישה.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ribbon band before the finale (only "The blue ribbon" concept shows it) -->
+      <img class="cx-band cx-band-flip" src="assets/illustrations/ribbon.svg" alt="" aria-hidden="true">
+
+      <!-- ===== 6. Call to action ===== -->
+      <section class="landing-block landing-final cx-final">
+        <div class="landing-glow landing-glow-blue" aria-hidden="true"></div>
+
+        <div class="landing-final-box">
+          <div class="cx-final-art" aria-hidden="true">
+            <span class="cx-bubble cx-bubble-heart"><ds-icon name="heart"></ds-icon></span>
+            <span class="cx-play"><ds-icon name="play"></ds-icon></span>
+            <span class="cx-bubble cx-bubble-squiggle"><img src="assets/illustrations/squiggle-white.svg" alt=""></span>
+          </div>
+
+          <h2 class="landing-title" data-i18n="bottomTitle">מוכנים לראות את זה בכיתה שלכם?</h2>
+          <p class="landing-lead" data-i18n="bottomDesc">היכנסו עם פרטי הגישה שקיבלתם, וגלו איך קאלי עוזרת לכל תלמיד להצליח ומשאירה את המורה בשליטה מלאה.</p>
+
+          <a href="index.html" class="landing-btn landing-btn-main">
+            <span data-i18n="bottomCtaBtn">היכנסו לסביבת ההדגמה</span>
+            <ds-icon class="landing-arrow" name="arrow-left" size="16"></ds-icon>
+          </a>
+
+          <div class="landing-trust">
+            <span data-i18n="trustKaltura">Kaltura · מובילה עולמית בטכנולוגיות וידאו ולמידה</span>
+            <span data-i18n="trustSec">אבטחת מידע ונגישות מלאה</span>
+            <span data-i18n="trustMoe">ספק סוכן למידה מאושר במשרד החינוך</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="ds/ds-icons.js"></script>
+  <script src="ds/ds.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

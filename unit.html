@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit 1: Send a Message! - Kaltura</title>
+  <link rel="stylesheet" href="ds/styles.css">
+  <!-- Prototype-only: Hebrew font. DS font (Lato) has no Hebrew glyphs. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="app unit-page">
+
+    <header class="app-header">
+      <a href="index.html"><img class="app-logo" src="assets/kaltura-logo-cropped.svg" alt="Kaltura"></a>
+      <nav class="app-nav" aria-label="ניווט ראשי">
+        <a href="index.html" class="app-nav-link">בית</a>
+        <a href="unit.html" class="app-nav-link">כל יחידות הלימוד</a>
+        <a href="#" class="app-nav-link">תיעוד פגישת מנטורינג</a>
+        <a href="#" class="app-nav-link">שאלון פעלנות</a>
+      </nav>
+      <div class="app-header-spacer"></div>
+      <button class="app-user-menu" type="button">
+        <ds-icon name="user" size="24"></ds-icon>
+        <span id="teacher-name"></span>
+        <ds-icon name="chevron-down" size="16"></ds-icon>
+      </button>
+      <button class="unit-tutor" type="button">
+        <!-- Figma shows an illustrated avatar; no image asset yet, so a DS user picture with an icon stands in -->
+        <span>המורה וירטואלי</span>
+        <span class="ds-user-picture ds-user-picture-md ds-user-picture-round"><ds-icon name="gen-ai" size="24"></ds-icon></span>
+      </button>
+    </header>
+
+    <main class="app-main unit-main">
+      <section class="unit-hero" aria-labelledby="unit-title">
+        <span class="unit-subject" id="unit-subject" dir="ltr"></span>
+        <h1 class="unit-title" id="unit-title" dir="ltr"></h1>
+        <dl class="unit-meta">
+          <dt>יעדי למידה</dt>
+          <dd dir="ltr" id="unit-goals"></dd>
+          <dt>נושא</dt>
+          <dd dir="ltr" id="unit-topic"></dd>
+          <dt>תת-נושא</dt>
+          <dd dir="ltr" id="unit-subtopic"></dd>
+        </dl>
+        <div class="unit-hero-footer">
+          <a class="unit-link" href="#">עוד פרטים</a>
+          <a class="ds-btn ds-btn-lg ds-btn-primary" href="lesson.html"><ds-icon name="play" size="24"></ds-icon>לנסות כתלמיד</a>
+        </div>
+      </section>
+
+      <table class="unit-lessons" aria-label="שיעורים ביחידה">
+        <colgroup>
+          <col class="unit-col-play">
+          <col class="unit-col-num">
+          <col>
+          <col class="unit-col-mandatory">
+          <col class="unit-col-wide">
+          <col class="unit-col-wide">
+          <col class="unit-col-wide">
+          <col class="unit-col-duration">
+          <col class="unit-col-difficulty">
+          <col class="unit-col-toggle">
+        </colgroup>
+        <thead>
+          <tr>
+            <th><span class="app-sr-only">כניסה לשיעור</span></th>
+            <th><span class="app-sr-only">מספר</span></th>
+            <th>שם השיעור</th>
+            <th>חובה</th>
+            <th>מטרת הרכיב</th>
+            <th>מיומנות</th>
+            <th>רמת השליטה</th>
+            <th>משך זמן</th>
+            <th>רמת קושי</th>
+            <th><span class="app-sr-only">יעדי הלמידה</span></th>
+          </tr>
+        </thead>
+        <!-- Rows are rendered from data.js by app.js -->
+        <tbody id="unit-lessons-body"></tbody>
+      </table>
+    </main>
+
+    <footer class="unit-footer">
+      <div class="unit-footer-inner">
+        <img class="app-logo" src="assets/kaltura-logo-cropped.svg" alt="Kaltura">
+        <div class="unit-footer-row">
+          <div class="unit-footer-text">
+            <nav class="unit-footer-links" aria-label="מידע משפטי">
+              <a class="unit-link" href="#">פרטיות</a>
+              <span aria-hidden="true">•</span>
+              <a class="unit-link" href="#">תנאי האתר</a>
+              <span aria-hidden="true">•</span>
+              <a class="unit-link" href="#">קוד התנהגות</a>
+            </nav>
+            <span class="unit-footer-legal">© 2026 Kaltura, Inc. כל הזכויות שמורות.</span>
+          </div>
+          <div class="app-footer-social">
+            <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Twitch"><ds-icon name="twitch" size="24"></ds-icon></a>
+            <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="YouTube"><ds-icon name="youtube" size="24"></ds-icon></a>
+            <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Slack"><ds-icon name="slack" size="24"></ds-icon></a>
+            <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Facebook"><ds-icon name="facebook" size="24"></ds-icon></a>
+            <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Instagram"><ds-icon name="instagram" size="24"></ds-icon></a>
+            <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="LinkedIn"><ds-icon name="linkedin" size="24"></ds-icon></a>
+            <a class="ds-btn ds-btn-lg ds-btn-secondary ds-btn-icon app-social" href="#" aria-label="Twitter"><ds-icon name="twitter" size="24"></ds-icon></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="ds/ds-icons.js"></script>
+  <script src="ds/ds.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
