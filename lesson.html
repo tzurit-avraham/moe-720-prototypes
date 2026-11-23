@@ -61,25 +61,34 @@
           <div class="lesson-bar-spacer"></div>
           <span class="lesson-mode-pill"><ds-icon name="visible" size="16"></ds-icon><span>צפייה כתלמיד</span></span>
           <span class="lesson-bar-divider" aria-hidden="true"></span>
-          <!-- Student view settings (teacher previews as a student): level (DS segmented) and the student's native language (DS select) -->
+          <!-- Student view settings (teacher previews as a student): level and native language.
+               Both are DS selects; a note at the top of each menu says that switching restarts the unit. -->
           <div class="lesson-bar-group">
             <span class="lesson-bar-label" id="lesson-level-label">רמה</span>
-            <div class="ds-segmented" role="radiogroup" aria-labelledby="lesson-level-label">
-              <button class="ds-segmented-item" role="radio" aria-checked="true"><span>A1</span></button>
-              <button class="ds-segmented-item" role="radio" aria-checked="false"><span>A2</span></button>
-              <button class="ds-segmented-item" role="radio" aria-checked="false"><span>B1</span></button>
-              <button class="ds-segmented-item" role="radio" aria-checked="false"><span>B2</span></button>
+            <div class="ds-select-wrapper lesson-bar-select lesson-noted-select">
+              <button class="ds-select" aria-haspopup="listbox" aria-labelledby="lesson-level-label">
+                <span>A1</span>
+                <ds-icon class="ds-select-chevron" name="chevron-down" size="16"></ds-icon>
+              </button>
+              <div class="ds-select-menu" role="listbox">
+                <div class="lesson-menu-note"><ds-icon name="info-circle" size="16"></ds-icon><span>החלפת רמה תתחיל את היחידה מההתחלה</span></div>
+                <button class="ds-select-item" role="option" aria-selected="true" data-value="A1"><span class="ds-select-item-label">A1</span><ds-icon class="ds-select-item-trailing" name="check" size="16"></ds-icon></button>
+                <button class="ds-select-item" role="option" data-value="A2"><span class="ds-select-item-label">A2</span></button>
+                <button class="ds-select-item" role="option" data-value="B1"><span class="ds-select-item-label">B1</span></button>
+                <button class="ds-select-item" role="option" data-value="B2"><span class="ds-select-item-label">B2</span></button>
+              </div>
             </div>
           </div>
           <span class="lesson-bar-divider" aria-hidden="true"></span>
           <div class="lesson-bar-group">
             <span class="lesson-bar-label" id="lesson-lang-label">שפת אם</span>
-            <div class="ds-select-wrapper lesson-lang-select">
+            <div class="ds-select-wrapper lesson-bar-select lesson-noted-select">
               <button class="ds-select" aria-haspopup="listbox" aria-labelledby="lesson-lang-label">
                 <span>עברית</span>
                 <ds-icon class="ds-select-chevron" name="chevron-down" size="16"></ds-icon>
               </button>
               <div class="ds-select-menu" role="listbox">
+                <div class="lesson-menu-note"><ds-icon name="info-circle" size="16"></ds-icon><span>החלפת שפה תתחיל את היחידה מההתחלה</span></div>
                 <button class="ds-select-item" role="option" aria-selected="true" data-value="he"><span class="ds-select-item-label">עברית</span><ds-icon class="ds-select-item-trailing" name="check" size="16"></ds-icon></button>
                 <button class="ds-select-item" role="option" data-value="ar"><span class="ds-select-item-label">ערבית</span></button>
                 <button class="ds-select-item" role="option" data-value="en"><span class="ds-select-item-label">אנגלית</span></button>
@@ -90,6 +99,7 @@
         <iframe class="lesson-frame" src="lesson-content.html" title="תוכן השיעור"></iframe>
       </main>
     </div>
+
 
 
   </div>

@@ -1857,28 +1857,47 @@ a.lesson-step-current:hover {
   background: var(--ds-tone-5);
 }
 
-/* ===== Prototype-only: RTL select menu as wide as its trigger (DS candidate) =====
+/* ===== Prototype-only: RTL select (DS candidate) =====
    The DS menu is a fixed 260px, anchored left, with left-aligned items (no RTL support).
-   Here it matches the trigger width, anchors to the start (right) edge and aligns items to the start. */
-/* Fixed trigger width so the longest option + check mark fit in the matching menu */
-.lesson-lang-select .ds-select {
-  width: calc(var(--ds-space-16) + var(--ds-space-10) + var(--ds-space-4)); /* 120px */
-}
-
-.lesson-lang-select .ds-select > span {
+   Here items align to the start (right), and the menu is sized per use below. */
+.lesson-bar-select .ds-select > span {
   flex: 1;
   text-align: start;
 }
 
-.lesson-lang-select .ds-select-menu {
-  width: 100%;
-  min-width: 0;
-  right: 0;
-  left: auto;
+.lesson-bar-select .ds-select-item {
+  text-align: start;
 }
 
-.lesson-lang-select .ds-select-item {
-  text-align: start;
+/* Selects in the bar: fixed 120px trigger. A menu with a note is wider so the note fits,
+   and grows into the page (the triggers sit near the left edge). */
+.lesson-bar-select .ds-select {
+  width: calc(var(--ds-space-16) + var(--ds-space-10) + var(--ds-space-4)); /* 120px */
+}
+
+.lesson-noted-select .ds-select-menu {
+  width: calc(var(--ds-space-16) * 3.5); /* 224px */
+  left: 0;
+  right: auto;
+}
+
+/* ===== Prototype-only: note at the top of a select menu (DS candidate) =====
+   The DS menu has no slot for a hint. Tone 7 box, small text, info icon. */
+.lesson-menu-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-1-5);
+  margin: 0 var(--ds-space-2) var(--ds-space-1);
+  padding: var(--ds-space-2);
+  border-radius: var(--ds-roundness-1);
+  background: var(--ds-tone-7);
+  color: var(--ds-tone-2);
+  font-size: var(--ds-font-size-3);
+  line-height: var(--ds-line-height-16);
+}
+
+.lesson-menu-note ds-icon {
+  flex-shrink: 0;
 }
 
 .lesson-frame {
